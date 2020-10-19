@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -97,6 +98,9 @@ public class LoginActivity extends AppCompatActivity {
                        loginPrefsEditor.putString("username", username);
                        loginPrefsEditor.putString("password", password);
                        loginPrefsEditor.apply();
+
+                       Intent mainActivity = new Intent(getApplicationContext(), MainActivity.class);
+                       startActivity(mainActivity);
                    }
 
                    @Override
