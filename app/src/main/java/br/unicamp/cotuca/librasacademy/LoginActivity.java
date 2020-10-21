@@ -89,7 +89,7 @@ public class LoginActivity extends AppCompatActivity {
                HttpManager.post(this, server + "/login", params, new VolleyCallback() {
                    @Override
                    public void onSuccess(JSONObject result) {
-                       Toast.makeText(getApplicationContext(), "Sucesso", Toast.LENGTH_SHORT).show();
+                       //Toast.makeText(getApplicationContext(), "Sucesso", Toast.LENGTH_SHORT).show();
                        loginPrefsEditor.putString("username", username);
                        loginPrefsEditor.putString("password", password);
                        loginPrefsEditor.apply();
