@@ -2,8 +2,11 @@ package br.unicamp.cotuca.librasacademy;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -34,6 +37,12 @@ public class SplashScreenActivity extends AppCompatActivity {
         String prefsUser = loginPreferences.getString("username", "");
         String prefsPass = loginPreferences.getString("password", "");
 
+        if (!conexaoDisponivel()) {
+            Toast.makeText(getApplicationContext(), R.string.no_internet, Toast.LENGTH_LONG).show();
+            Intent loginActivity = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(loginActivity);
+        }
+
         if (prefsUser != "" && prefsPass != "") {
             username = prefsUser;
             password = prefsPass;
@@ -46,6 +55,12 @@ public class SplashScreenActivity extends AppCompatActivity {
 
     private void login() {
         try {
+            if (!conexaoDisponivel()) {
+                Toast.makeText(getApplicationContext(), R.string.no_internet, Toast.LENGTH_LONG).show();
+                Intent loginActivity = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(loginActivity);
+                return;
+            }
             String url = server + "/login";
 
             try {
@@ -72,5 +87,16 @@ public class SplashScreenActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private boolean conexaoDisponivel(){
+        Context context = getApplicationContext();
+        ConnectivityManager connect = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connect != null)
+        {
+            NetworkInfo information = connect.getActiveNetworkInfo();
+            return (information != null && information.getState() == NetworkInfo.State.CONNECTED);
+        }
+        return false;
     }
 }

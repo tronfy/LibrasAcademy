@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.view.View;
@@ -64,6 +66,7 @@ public class LoginActivity extends AppCompatActivity {
             password = prefsPass;
 
             editTextUsername.setText(username);
+            editTextPassword.setText(password);
 
             login();
         }
@@ -79,6 +82,10 @@ public class LoginActivity extends AppCompatActivity {
 
     private void login() {
         try {
+            if (!conexaoDisponivel()) {
+                Toast.makeText(getApplicationContext(), R.string.no_internet, Toast.LENGTH_LONG).show();
+                return;
+            }
             String url = server + "/login";
 
             try {
@@ -114,5 +121,16 @@ public class LoginActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private boolean conexaoDisponivel(){
+        Context context = getApplicationContext();
+        ConnectivityManager connect = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connect != null)
+        {
+            NetworkInfo information = connect.getActiveNetworkInfo();
+            return (information != null && information.getState() == NetworkInfo.State.CONNECTED);
+        }
+        return false;
     }
 }
