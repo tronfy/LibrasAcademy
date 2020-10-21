@@ -70,9 +70,6 @@ public class LoginActivity extends AppCompatActivity {
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                /*InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(editTextUsername.getWindowToken(), 0);*/
-
                 username = editTextUsername.getText().toString();
                 password = editTextPassword.getText().toString();
                 login();
@@ -81,7 +78,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void login() {
-        //HttpManager.post(server + "/login", "test");
         try {
             String url = server + "/login";
 
@@ -93,7 +89,6 @@ public class LoginActivity extends AppCompatActivity {
                HttpManager.post(this, server + "/login", params, new VolleyCallback() {
                    @Override
                    public void onSuccess(JSONObject result) {
-                       System.out.println("SUCCESS: " + result);
                        Toast.makeText(getApplicationContext(), "Sucesso", Toast.LENGTH_SHORT).show();
                        loginPrefsEditor.putString("username", username);
                        loginPrefsEditor.putString("password", password);
@@ -119,8 +114,5 @@ public class LoginActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        /*startActivity(new Intent(LoginActivity.this, MainActivity.class));
-        LoginActivity.this.finish();*/
     }
 }

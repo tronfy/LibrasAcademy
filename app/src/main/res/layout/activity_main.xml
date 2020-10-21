@@ -18,15 +18,30 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorBgLight"
         android:elevation="4dp"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        android:theme="@style/ThemeOverlay.AppCompat.DayNight.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+            <TextView
+                android:id = "@+id/name"
+                android:layout_width = "match_parent"
+                android:layout_height = "match_parent"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text = "@string/app_name"
+                android:textSize = "24sp"
+                android:textColor = "#000"
+                android:fontFamily="@font/coolvetica"
+                android:gravity="center_vertical"/>
+
+        </androidx.appcompat.widget.Toolbar>
 
         <FrameLayout
             android:id="@+id/fragment_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent"
+            android:padding="10dp">
 
             <ListView
                 android:layout_width="match_parent"
