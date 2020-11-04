@@ -1,50 +1,40 @@
 package br.unicamp.cotuca.librasacademy;
 
-import android.content.Context;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.JsonReader;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.widget.Toolbar;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import br.unicamp.cotuca.librasacademy.dbo.Licao;
 
-public class MainActivity extends AppCompatActivity {
+public class CategoriaActivity extends AppCompatActivity {
     private DrawerLayout drawer;
     private ListView listview;
-    private List<Licao> categorias;
+    private List<Licao> licoes;
     private String server;
     private LicaoAdapter adapter;
+    private Licao categoria;
+    private TextView titulo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,23 +57,29 @@ public class MainActivity extends AppCompatActivity {
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        Bundle extras = getIntent().getExtras();
+        categoria = (Licao) extras.getSerializable("CATEGORIA");
+
+        titulo = findViewById(R.id.name);
+        titulo.setText(categoria.getNome());
+
         listview = findViewById(R.id.list_itens);
 
-        categorias = new ArrayList<Licao>();
-        adapter = new LicaoAdapter(MainActivity.this, categorias);
+        licoes = new ArrayList<Licao>();
+        adapter = new LicaoAdapter(CategoriaActivity.this, licoes);
         listview.setAdapter(adapter);
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(getApplicationContext(), CategoriaActivity.class);
-                intent.putExtra("CATEGORIA", categorias.get(i));
-                startActivity(intent);
+                Toast.makeText(CategoriaActivity.this, "clicou " + i, Toast.LENGTH_SHORT).show();
             }
         });
 
         try {
-            HttpManager.get(this, server + "/categorias", new VolleyCallback() {
+            HashMap<String,String> params = new HashMap<String,String>();
+            params.put("categoria", categoria.getNome());
+            HttpManager.get(this, server + "/licoes", params, new VolleyCallback() {
                 @Override
                 public void onSuccess(JSONObject result) {
                     try {
@@ -92,9 +88,10 @@ public class MainActivity extends AppCompatActivity {
                             JSONObject o = res.getJSONObject(i);
                             String nome = o.getString("nome");
                             String descricao = o.getString("descricao");
-                            Licao categoria = new Licao(nome, descricao);
-                            categorias.add(categoria);
+                            Licao licao = new Licao(nome, descricao);
+                            licoes.add(licao);
                         }
+                        System.out.println(licoes);
                         adapter.notifyDataSetChanged();
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -116,12 +113,5 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
+
 }

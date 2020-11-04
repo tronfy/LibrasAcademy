@@ -11,6 +11,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class HttpManager {
 
@@ -18,6 +19,37 @@ public class HttpManager {
         try {
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                     (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            callback.onSuccess(response);
+                        }
+                    }, new Response.ErrorListener() {
+
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            System.err.println("Erro de Volley: " + error);
+                        }
+                    });
+
+            VolleySingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    public static void get(Context context, String url, HashMap params, final VolleyCallback callback) {
+        try {
+            String paramsString = "?";
+            HashMap<String,String> myParams = new HashMap<String,String>(params);
+            for(Map.Entry<String, String> entry : myParams.entrySet()) {
+                String key = entry.getKey();
+                String value = entry.getValue();
+
+                paramsString += key + "=" + value;
+            }
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                    (Request.Method.GET, url + paramsString, null, new Response.Listener<JSONObject>() {
 
                         @Override
                         public void onResponse(JSONObject response) {

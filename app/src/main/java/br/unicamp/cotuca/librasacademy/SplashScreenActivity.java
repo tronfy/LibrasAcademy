@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -17,7 +18,7 @@ import java.util.HashMap;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
-    private String username, password;
+    private String username, password, prefsUser, prefsPass;
 
     private SharedPreferences loginPreferences;
 
@@ -32,8 +33,8 @@ public class SplashScreenActivity extends AppCompatActivity {
 
         loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
 
-        String prefsUser = loginPreferences.getString("username", "");
-        String prefsPass = loginPreferences.getString("password", "");
+        prefsUser = loginPreferences.getString("username", "");
+        prefsPass = loginPreferences.getString("password", "");
 
         if (!conexaoDisponivel()) {
             Toast.makeText(getApplicationContext(), R.string.no_internet, Toast.LENGTH_LONG).show();
@@ -41,6 +42,17 @@ public class SplashScreenActivity extends AppCompatActivity {
             startActivity(loginActivity);
         }
 
+        /*Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                tryLogin();
+            }
+        }, 1500);*/
+        tryLogin();
+    }
+
+    private void tryLogin() {
         if (prefsUser != "" && prefsPass != "") {
             username = prefsUser;
             password = prefsPass;
@@ -50,6 +62,8 @@ public class SplashScreenActivity extends AppCompatActivity {
             startActivity(loginActivity);
         }
     }
+
+
 
     private void login() {
         try {

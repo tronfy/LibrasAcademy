@@ -1,6 +1,8 @@
 package br.unicamp.cotuca.librasacademy.dbo;
 
-public class Licao {
+import java.io.Serializable;
+
+public class Licao implements Serializable {
     private String nome;
     private String descricao;
 
