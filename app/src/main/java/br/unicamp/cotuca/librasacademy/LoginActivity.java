@@ -55,7 +55,6 @@ public class LoginActivity extends AppCompatActivity {
         buttonLogin = (Button)findViewById(R.id.buttonLogin);
 
         loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
-        loginPrefsEditor = loginPreferences.edit();
 
         String prefsUser = loginPreferences.getString("username", "");
         String prefsPass = loginPreferences.getString("password", "");
@@ -97,6 +96,7 @@ public class LoginActivity extends AppCompatActivity {
                    @Override
                    public void onSuccess(JSONObject result) {
                        //Toast.makeText(getApplicationContext(), "Sucesso", Toast.LENGTH_SHORT).show();
+                       loginPrefsEditor = loginPreferences.edit();
                        loginPrefsEditor.putString("username", username);
                        loginPrefsEditor.putString("password", password);
                        loginPrefsEditor.apply();

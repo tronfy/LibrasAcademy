@@ -20,7 +20,6 @@ public class SplashScreenActivity extends AppCompatActivity {
     private String username, password;
 
     private SharedPreferences loginPreferences;
-    private SharedPreferences.Editor loginPrefsEditor;
 
     private String server;
 
@@ -32,7 +31,6 @@ public class SplashScreenActivity extends AppCompatActivity {
         server = getResources().getString(R.string.server);
 
         loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
-        loginPrefsEditor = loginPreferences.edit();
 
         String prefsUser = loginPreferences.getString("username", "");
         String prefsPass = loginPreferences.getString("password", "");
