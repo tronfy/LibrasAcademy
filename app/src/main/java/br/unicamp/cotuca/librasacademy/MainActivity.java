@@ -87,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
             HttpManager.get(this, server + "/categorias", new VolleyCallback() {
                 @Override
                 public void onSuccess(JSONObject result) {
-                    Toast.makeText(getApplicationContext(), "Sucesso", Toast.LENGTH_SHORT).show();
                     try {
                         JSONArray res = (JSONArray) result.get("resultado");
                         for (int i = 0; i < res.length(); i++) {
