@@ -6,4 +6,12 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="no_internet">Não há conexão com a internet</string>
+
+    <string name="dados_denadai">
+        <a href="https://github.com/nicolasdschmidt">Nícolas Denadai</a>
+    </string>
+
+    <string name="dados_oliveira">
+        <a href="https://github.com/NicolasM3">Nícolas Oliveira</a>
+    </string>
 </resources>

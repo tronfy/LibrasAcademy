@@ -30,7 +30,9 @@ import java.util.List;
 
 import br.unicamp.cotuca.librasacademy.Fragments.DictionaryFragment;
 import br.unicamp.cotuca.librasacademy.Fragments.CategoriasFragment;
+import br.unicamp.cotuca.librasacademy.Fragments.FeedbackFragment;
 import br.unicamp.cotuca.librasacademy.Fragments.LicaoFragment;
+import br.unicamp.cotuca.librasacademy.Fragments.AboutFragment;
 import br.unicamp.cotuca.librasacademy.dbo.Licao;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
@@ -128,6 +130,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         new CategoriasFragment()).commit();
 
                 break;
+
             case R.id.nav_lesson:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new LicaoFragment()).commit();
@@ -136,6 +139,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_dictionary:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new DictionaryFragment()).commit();
+                break;
+
+            case R.id.nav_feedback:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new FeedbackFragment()).commit();
+                break;
+
+            case R.id.nav_about:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new AboutFragment()).commit();
+                break;
         }
 
         drawer.closeDrawer(GravityCompat.START);
