@@ -1,16 +1,12 @@
 package br.unicamp.cotuca.librasacademy.Fragments;
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,11 +17,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.security.spec.ECField;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.unicamp.cotuca.librasacademy.CategoriaActivity;
 import br.unicamp.cotuca.librasacademy.HttpManager;
 import br.unicamp.cotuca.librasacademy.LicaoAdapter;
 import br.unicamp.cotuca.librasacademy.MainActivity;
@@ -53,7 +47,7 @@ public class CategoriasFragment extends Fragment {
 
         server = getResources().getString(R.string.server);
 
-        listActivitys = (ListView) view.findViewById(R.id.list_activitys);
+        listActivitys = view.findViewById(R.id.list_activitys);
 
         categorias = new ArrayList<Licao>();
         adapter = new LicaoAdapter(context, categorias);

@@ -22,7 +22,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import br.unicamp.cotuca.librasacademy.HttpManager;
-import br.unicamp.cotuca.librasacademy.LicaoActivity;
 import br.unicamp.cotuca.librasacademy.LicaoAdapter;
 import br.unicamp.cotuca.librasacademy.R;
 import br.unicamp.cotuca.librasacademy.VolleyCallback;
@@ -53,7 +52,7 @@ public class LicaoFragment extends Fragment {
 
         server = getResources().getString(R.string.server);
 
-        listActivitys = (ListView) view.findViewById(R.id.list_activitys);
+        listActivitys = view.findViewById(R.id.list_activitys);
 
         licoes = new ArrayList<Licao>();
         adapter = new LicaoAdapter(context, licoes);

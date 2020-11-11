@@ -1,8 +1,8 @@
 package br.unicamp.cotuca.librasacademy;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class LicaoActivity extends AppCompatActivity {
 

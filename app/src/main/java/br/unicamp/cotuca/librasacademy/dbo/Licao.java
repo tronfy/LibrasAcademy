@@ -3,8 +3,8 @@ package br.unicamp.cotuca.librasacademy.dbo;
 import java.io.Serializable;
 
 public class Licao implements Serializable {
-    private String nome;
-    private String descricao;
+    private final String nome;
+    private final String descricao;
 
     public Licao(String nome, String descricao) {
         this.nome = nome;

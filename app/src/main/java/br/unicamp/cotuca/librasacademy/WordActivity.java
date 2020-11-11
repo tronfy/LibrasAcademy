@@ -1,18 +1,14 @@
 package br.unicamp.cotuca.librasacademy;
 
-import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.bumptech.glide.Glide;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,8 +32,8 @@ public class WordActivity extends AppCompatActivity {
         Bundle b = getIntent().getExtras();
         word = b.getString("word");
 
-        videoSinais = (VideoView) findViewById(R.id.videoSinais);
-        txtWord = (TextView) findViewById(R.id.txtWord);
+        videoSinais = findViewById(R.id.videoSinais);
+        txtWord = findViewById(R.id.txtWord);
         txtWord.setText(word);
 
         HashMap<String, String> params = new HashMap<String, String>();
@@ -50,7 +46,7 @@ public class WordActivity extends AppCompatActivity {
                 public void onSuccess(JSONObject result) {
                     String txt = null;
                     try {
-                        txt = result.getString("link").toString();
+                        txt = result.getString("link");
                         Toast.makeText(getApplicationContext(), txt, Toast.LENGTH_SHORT).show();
 
                         Uri video = Uri.parse(txt);

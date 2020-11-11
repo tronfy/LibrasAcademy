@@ -24,7 +24,7 @@ public class AboutFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        TextView text = (TextView) view.findViewById(R.id.denadai);
+        TextView text = view.findViewById(R.id.denadai);
         text.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
