@@ -38,7 +38,6 @@ import br.unicamp.cotuca.librasacademy.dbo.Licao;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private DrawerLayout drawer;
     private ListView listview;
-    private List<Licao> categorias;
     private String server;
     private LicaoAdapter adapter;
 
@@ -74,20 +73,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         listview = findViewById(R.id.list_itens);
 
-        categorias = new ArrayList<Licao>();
+        /*categorias = new ArrayList<Licao>();
         adapter = new LicaoAdapter(MainActivity.this, categorias);
-        listview.setAdapter(adapter);
+        listview.setAdapter(adapter);*/
 
-        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(getApplicationContext(), CategoriaActivity.class);
-                intent.putExtra("CATEGORIA", categorias.get(i));
-                startActivity(intent);
-            }
-        });
-
-        try {
+        /*try {
             HttpManager.get(this, server + "/categorias", new VolleyCallback() {
                 @Override
                 public void onSuccess(JSONObject result) {
@@ -118,7 +108,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             });
         } catch (Exception e) {
             System.err.println(e.getMessage());
-        }
+        }*/
+    }
+
+    public void getClick(Licao licao) {
+        System.out.println(licao);
+        Intent intent = new Intent(getApplicationContext(), CategoriaActivity.class);
+        intent.putExtra("CATEGORIA", licao);
+        startActivity(intent);
     }
 
     @Override
@@ -128,12 +125,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_home:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new CategoriasFragment()).commit();
-
-                break;
-
-            case R.id.nav_lesson:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new LicaoFragment()).commit();
                 break;
 
             case R.id.nav_dictionary:
