@@ -26,6 +26,7 @@ public class LicaoActivity extends AppCompatActivity {
     private int sublicaoIndex;
     private ArrayList<SubLicao> sublicoes;
 
+    private TextView tvNome;
     private TextView tvTexto;
     private Button btnPrev;
     private Button btnNext;
@@ -37,6 +38,7 @@ public class LicaoActivity extends AppCompatActivity {
 
         server = getResources().getString(R.string.server);
 
+        tvNome = (TextView) findViewById(R.id.name);
         tvTexto = (TextView) findViewById(R.id.tvTexto);
         btnPrev = (Button) findViewById(R.id.btnPrev);
         btnNext = (Button) findViewById(R.id.btnNext);
@@ -79,6 +81,7 @@ public class LicaoActivity extends AppCompatActivity {
                             sublicoes.add(sublicao);
                         }
                         System.out.println(sublicoes);
+                        tvNome.setText(licao.getNome());
                         updateView();
                     } catch (JSONException e) {
                         e.printStackTrace();
