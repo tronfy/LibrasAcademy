@@ -122,6 +122,12 @@ public class CategoriaActivity extends AppCompatActivity implements NavigationVi
         }*/
     }
 
+    public void getClick(Licao licao) {
+        //System.out.println(licao);
+        Intent intent = new Intent(getApplicationContext(), LicaoActivity.class);
+        intent.putExtra("LICAO", licao);
+        startActivity(intent);
+    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {

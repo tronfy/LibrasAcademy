@@ -5,8 +5,40 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".LicaoActivity"
-    android:background="@color/colorPrimaryDark">
+    android:background="@color/colorBgLight">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
+        <Button
+            android:id="@+id/btnPrev"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="voltar"
+            android:drawableStart="@drawable/ic_arrow_back"
+            android:textColor="@android:color/black"
+            android:background="@color/colorBgAccent" />
+
+        <Button
+            android:id="@+id/btnNext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="avançar"
+            android:drawableEnd="@drawable/ic_arrow_forward"
+            android:textColor="@android:color/black"
+            android:background="@color/colorBgAccent" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvTexto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:justificationMode="inter_word"
+        android:padding="10pt"/>
 
 </LinearLayout>
