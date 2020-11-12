@@ -12,8 +12,8 @@ import java.util.List;
 import br.unicamp.cotuca.librasacademy.dbo.Licao;
 
 public class LicaoAdapter extends BaseAdapter {
-    private Context context;
-    private List<Licao> licoes;
+    private final Context context;
+    private final List<Licao> licoes;
 
     public LicaoAdapter(Context context, List<Licao> licoes) {
         this.context = context;
@@ -40,9 +40,9 @@ public class LicaoAdapter extends BaseAdapter {
         View listView;
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         listView = inflater.inflate(R.layout.item_row, null);
-        TextView title = (TextView) listView.findViewById(R.id.text_title);
-        TextView description = (TextView) listView.findViewById(R.id.text_description);
-        TextView autor = (TextView) listView.findViewById(R.id.text_author);
+        TextView title = listView.findViewById(R.id.text_title);
+        TextView description = listView.findViewById(R.id.text_description);
+        TextView autor = listView.findViewById(R.id.text_author);
 
         title.setText(licoes.get(position).getNome());
         description.setText(licoes.get(position).getDescricao());

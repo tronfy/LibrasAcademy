@@ -1,34 +1,21 @@
 package br.unicamp.cotuca.librasacademy;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.provider.CalendarContract;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.NetworkResponse;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.ServerError;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.HttpHeaderParser;
-import com.android.volley.toolbox.JsonObjectRequest;
+import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 
 public class LoginActivity extends AppCompatActivity {
@@ -50,11 +37,22 @@ public class LoginActivity extends AppCompatActivity {
 
         server = getResources().getString(R.string.server);
 
-        editTextUsername = (EditText)findViewById(R.id.editTexUsername);
-        editTextPassword = (EditText)findViewById(R.id.editTextPassword);
-        buttonLogin = (Button)findViewById(R.id.buttonLogin);
+        editTextUsername = findViewById(R.id.editTexUsername);
+        editTextPassword = findViewById(R.id.editTextPassword);
+        buttonLogin = findViewById(R.id.buttonLogin);
 
         loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
+
+        try {
+            Bundle extras = getIntent().getExtras();
+            boolean clear = extras.getBoolean("CLEAR");
+
+            if (clear) {
+                loginPrefsEditor = loginPreferences.edit();
+                loginPrefsEditor.clear();
+                loginPrefsEditor.apply();
+            }
+        } catch (Exception e) {}
 
         String prefsUser = loginPreferences.getString("username", "");
         String prefsPass = loginPreferences.getString("password", "");

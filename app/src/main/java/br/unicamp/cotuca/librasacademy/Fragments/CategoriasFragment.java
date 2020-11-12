@@ -6,21 +6,31 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import br.unicamp.cotuca.librasacademy.HttpManager;
+import br.unicamp.cotuca.librasacademy.LicaoAdapter;
+import br.unicamp.cotuca.librasacademy.MainActivity;
 import br.unicamp.cotuca.librasacademy.R;
+import br.unicamp.cotuca.librasacademy.VolleyCallback;
+import br.unicamp.cotuca.librasacademy.dbo.Licao;
 
 public class CategoriasFragment extends Fragment {
-    String mtitle[] = {"Alfabeto Manual"};
-    String mDescription[] = {"Que tal aprende sobre o alfabeto utilizade na libras"};
-    String mAuthor[] = {"Desconhecido"};
+    String server;
+    List<Licao> categorias;
+    LicaoAdapter adapter;
 
     ListView listActivitys;
     Context context;
@@ -35,17 +45,58 @@ public class CategoriasFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        listActivitys = (ListView) view.findViewById(R.id.list_activitys);
+        server = getResources().getString(R.string.server);
 
-        CategoriasFragment.MyAdapter adapter = new CategoriasFragment.MyAdapter( context, mtitle, mDescription, mAuthor);
+        listActivitys = view.findViewById(R.id.list_activitys);
 
+        categorias = new ArrayList<Licao>();
+        adapter = new LicaoAdapter(context, categorias);
         listActivitys.setAdapter(adapter);
+        try {
+            listActivitys.setDivider(context.getResources().getDrawable(R.color.colorBgLight, context.getTheme()));
+        } catch (Exception e) {}
+        listActivitys.setDividerHeight(20);
+
+        try {
+            HttpManager.get(context, server + "/categorias", new VolleyCallback() {
+                @Override
+                public void onSuccess(JSONObject result) {
+                    try {
+                        JSONArray res = (JSONArray) result.get("resultado");
+                        for (int i = 0; i < res.length(); i++) {
+                            JSONObject o = res.getJSONObject(i);
+                            String nome = o.getString("nome");
+                            String descricao = o.getString("descricao");
+                            Licao categoria = new Licao(nome, descricao);
+                            categorias.add(categoria);
+                        }
+                        System.out.println(categorias);
+                        adapter.notifyDataSetChanged();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onError(JSONObject result) {
+                    try {
+                        Toast.makeText(context, result.getString("err"), Toast.LENGTH_SHORT).show();
+                    } catch (JSONException e) {
+
+                    }
+
+                }
+            });
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+
         listActivitys.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                if (i == 0) {
-                    Toast.makeText(context, "clicou", Toast.LENGTH_SHORT).show();
-                }
+                System.out.println(("activity: " + getActivity()));//.getClick(categorias.get(i));
+                ((MainActivity) getActivity()).getClick(categorias.get(i));
+                //Toast.makeText(context, "clicou (frag) " + i, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -54,40 +105,5 @@ public class CategoriasFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.activity_hub, container, false);
-    }
-
-    public static class MyAdapter extends ArrayAdapter<String>
-    {
-        Context context;
-        String rTitle[];
-        String rDescription[];
-        String rAuthor[];
-
-        MyAdapter(Context c, String title[], String description[], String author[])
-        {
-            super(c, R.layout.item_row, R.id.text_title, title);
-            this.context = c;
-            this.rTitle = title;
-            this.rDescription = description;
-            this.rAuthor = author;
-        }
-
-        @NonNull
-        @Override
-        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent)
-        {
-            LayoutInflater layoutInflater = (LayoutInflater) context.getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View row = layoutInflater.inflate(R.layout.item_row, parent, false);
-            TextView myTitle = row.findViewById(R.id.text_title);
-            TextView myDescription = row.findViewById(R.id.text_description);
-            TextView myAuthor = row.findViewById(R.id.text_author);
-
-            myTitle.setText(rTitle[position]);
-            myDescription.setText(rDescription[position]);
-            myAuthor.setText(rAuthor[position]);
-
-
-            return row;
-        }
     }
 }

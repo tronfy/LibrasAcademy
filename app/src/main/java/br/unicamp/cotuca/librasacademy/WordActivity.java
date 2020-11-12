@@ -1,16 +1,15 @@
 package br.unicamp.cotuca.librasacademy;
 
-import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
 
 import com.bumptech.glide.Glide;
 
@@ -75,6 +74,7 @@ public class WordActivity extends AppCompatActivity {
 
                 } catch (JSONException e) {
                     Toast.makeText(getApplicationContext(), "Erro ao pegar dados da palavra", Toast.LENGTH_SHORT).show();
+
                 }
             }
 

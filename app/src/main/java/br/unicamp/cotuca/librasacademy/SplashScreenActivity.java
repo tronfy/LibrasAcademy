@@ -1,17 +1,15 @@
 package br.unicamp.cotuca.librasacademy;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.os.Handler;
 import android.widget.Toast;
 
-import org.json.JSONException;
+import androidx.appcompat.app.AppCompatActivity;
+
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -48,7 +46,7 @@ public class SplashScreenActivity extends AppCompatActivity {
             public void run() {
                 tryLogin();
             }
-        }, 1500);*/
+        }, 1000);*/
         tryLogin();
     }
 

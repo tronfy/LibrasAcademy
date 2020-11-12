@@ -5,4 +5,5 @@
     <color name="colorAccent">#6ED3C7</color>
     <color name="backgroundLogo">#2B475C</color>
     <color name="colorBgLight">#FFFFFF</color>
+    <color name="colorBgAccent">#E6E6E6</color>
 </resources>

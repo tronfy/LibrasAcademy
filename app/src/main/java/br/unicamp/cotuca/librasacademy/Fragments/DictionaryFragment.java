@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -18,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+
 
 import com.bumptech.glide.Glide;
 
@@ -35,7 +35,7 @@ import br.unicamp.cotuca.librasacademy.VolleyCallback;
 import br.unicamp.cotuca.librasacademy.WordActivity;
 
 public class DictionaryFragment extends Fragment {
-    ArrayList<String> alphabet = new ArrayList(Arrays.asList(new String[]{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"}));
+    ArrayList<String> alphabet = new ArrayList(Arrays.asList("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"));
     private Context context;
     private ListView itens;
     private ImageButton search;
@@ -59,9 +59,9 @@ public class DictionaryFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        itens = (ListView) view.findViewById(R.id.list_dictionary);
-        search = (ImageButton) view.findViewById(R.id.buttonSearch);
-        txtSearch = (EditText) view.findViewById(R.id.edtTextSerach);
+        itens = view.findViewById(R.id.list_dictionary);
+        search = view.findViewById(R.id.buttonSearch);
+        txtSearch = view.findViewById(R.id.edtTextSerach);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>( context, android.R.layout.simple_list_item_1, alphabet);
 
