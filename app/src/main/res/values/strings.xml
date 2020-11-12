@@ -14,4 +14,11 @@
     <string name="dados_oliveira">
         <a href="https://github.com/NicolasM3">Nícolas Oliveira</a>
     </string>
+
+    <string-array name="feedback_types">
+        <item>Reportar bug</item>
+        <item>Pedir Implementação</item>
+        <item>Perguntas</item>
+        <item>Outro</item>
+    </string-array>
 </resources>
