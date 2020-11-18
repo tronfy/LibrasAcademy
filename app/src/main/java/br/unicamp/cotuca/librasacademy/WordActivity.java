@@ -3,6 +3,7 @@ package br.unicamp.cotuca.librasacademy;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -51,7 +52,7 @@ public class WordActivity extends AppCompatActivity {
                     data = result.getJSONObject("palavras");
                     site += data.getString("gif");
 
-                    Uri video = Uri.parse(site);
+                    final Uri video = Uri.parse(site);
                     videoSinais.setVideoURI(video);
                     videoSinais.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                         @Override
@@ -60,10 +61,18 @@ public class WordActivity extends AppCompatActivity {
                             videoSinais.start();
                         }
                     });
+                    videoSinais.setOnErrorListener(new MediaPlayer.OnErrorListener() {
+                        @Override
+                        public boolean onError(MediaPlayer mediaPlayer, int i, int i1) {
+                            Toast.makeText(getApplicationContext(), "Erro ao tocar vídeo", Toast.LENGTH_SHORT).show();
+                            videoSinais.setVisibility(View.GONE);
+                            return true;
+                        }
+                    });
 
-                    info = " Significado: " + data.getString("significado") + "\n Gênero: " + data.getString("genero")
-                        + "\n Origem: " + data.getString("origem") + "\n Exemplo em português: " + data.getString("exemploPT")
-                        + "\n Exemplo em Libras: " + data.getString("exemploLibras");
+                    info = "Significado: " + data.getString("significado") + "\nGênero: " + data.getString("genero")
+                        + "\nOrigem: " + data.getString("origem") + "\nExemplo em português: " + data.getString("exemploPT")
+                        + "\nExemplo em Libras: " + data.getString("exemploLibras");
                     txtInfo.setText(info);
 
                 } catch (JSONException e) {
