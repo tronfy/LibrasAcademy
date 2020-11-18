@@ -100,8 +100,17 @@ public class LicaoActivity extends AppCompatActivity {
 
     private void updateView() {
         if (sublicaoIndex < sublicoes.size() && sublicaoIndex >= 0) {
+            tvNome.setText((licao.getNome() + " (" + (sublicaoIndex+1) + "/" + sublicoes.size() + ")"));
             String texto = sublicoes.get(sublicaoIndex).getTexto().replaceAll("\\\\n", System.getProperty("line.separator"));
             tvTexto.setText(texto);
+            if (sublicaoIndex == sublicoes.size() - 1) {
+                btnNext.setText("concluir");
+                btnNext.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_check, 0);
+            }
+            else {
+                btnNext.setText("avançar");
+                btnNext.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_arrow_forward, 0);
+            }
         } else {
             LicaoActivity.this.finish();
         }
