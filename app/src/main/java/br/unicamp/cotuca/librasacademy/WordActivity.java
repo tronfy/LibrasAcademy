@@ -10,10 +10,6 @@ import android.widget.VideoView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-
-import com.bumptech.glide.Glide;
-
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -46,16 +42,14 @@ public class WordActivity extends AppCompatActivity {
         HashMap<String, String> params = new HashMap<String, String>();
         params.put("palavra", word);
 
-        HttpManager.get(this, server + ":80/dados_palavra/", params, new VolleyCallback() {
+        HttpManager.get(this, server + "/palavra/", params, new VolleyCallback() {
             @Override
             public void onSuccess(JSONObject result) {
                 JSONObject data = null;
-                String link = site;
                 String info = "";
                 try {
                     data = result.getJSONObject("palavras");
                     site += data.getString("gif");
-//                        Toast.makeText(getApplicationContext(), site, Toast.LENGTH_SHORT).show();
 
                     Uri video = Uri.parse(site);
                     videoSinais.setVideoURI(video);
@@ -67,7 +61,7 @@ public class WordActivity extends AppCompatActivity {
                         }
                     });
 
-                    info = " Significao: " + data.getString("significado") + "\n Gênero: " + data.getString("genero")
+                    info = " Significado: " + data.getString("significado") + "\n Gênero: " + data.getString("genero")
                         + "\n Origem: " + data.getString("origem") + "\n Exemplo em português: " + data.getString("exemploPT")
                         + "\n Exemplo em Libras: " + data.getString("exemploLibras");
                     txtInfo.setText(info);

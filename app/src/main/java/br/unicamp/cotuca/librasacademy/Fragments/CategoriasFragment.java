@@ -94,9 +94,7 @@ public class CategoriasFragment extends Fragment {
         listActivitys.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                System.out.println(("activity: " + getActivity()));//.getClick(categorias.get(i));
                 ((MainActivity) getActivity()).getClick(categorias.get(i));
-                //Toast.makeText(context, "clicou (frag) " + i, Toast.LENGTH_SHORT).show();
             }
         });
     }

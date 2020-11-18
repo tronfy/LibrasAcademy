@@ -24,7 +24,6 @@ import java.util.List;
 import br.unicamp.cotuca.librasacademy.CategoriaActivity;
 import br.unicamp.cotuca.librasacademy.HttpManager;
 import br.unicamp.cotuca.librasacademy.LicaoAdapter;
-import br.unicamp.cotuca.librasacademy.MainActivity;
 import br.unicamp.cotuca.librasacademy.R;
 import br.unicamp.cotuca.librasacademy.VolleyCallback;
 import br.unicamp.cotuca.librasacademy.dbo.Licao;
@@ -104,7 +103,6 @@ public class LicaoFragment extends Fragment {
         listActivitys.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(context, "clicou licao " + licoes.get(i).getNome(), Toast.LENGTH_SHORT).show();
                 ((CategoriaActivity) getActivity()).getClick(licoes.get(i));
             }
         });

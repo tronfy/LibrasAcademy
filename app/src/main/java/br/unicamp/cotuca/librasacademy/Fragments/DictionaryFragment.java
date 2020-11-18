@@ -11,27 +11,15 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-
-
-import com.bumptech.glide.Glide;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 
-import br.unicamp.cotuca.librasacademy.HttpManager;
 import br.unicamp.cotuca.librasacademy.R;
-import br.unicamp.cotuca.librasacademy.VolleyCallback;
 import br.unicamp.cotuca.librasacademy.WordActivity;
 
 public class DictionaryFragment extends Fragment {
@@ -69,7 +57,7 @@ public class DictionaryFragment extends Fragment {
         itens.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Fragment words_fragment = new Dictionary2Fraagment();
+                Fragment words_fragment = new Dictionary2Fragment();
 
                 Bundle letter = new Bundle();
                 letter.putString("letter", alphabet.get(i));

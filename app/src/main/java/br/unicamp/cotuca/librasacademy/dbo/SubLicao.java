@@ -1,8 +1,8 @@
 package br.unicamp.cotuca.librasacademy.dbo;
 
 public class SubLicao {
-    private String texto;
-    private int codigo;
+    private final String texto;
+    private final int codigo;
 
     public SubLicao (String texto, int codigo) {
         this.texto = texto;

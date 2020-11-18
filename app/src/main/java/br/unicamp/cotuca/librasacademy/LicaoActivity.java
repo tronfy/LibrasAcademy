@@ -1,6 +1,5 @@
 package br.unicamp.cotuca.librasacademy;
 
-import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -59,7 +58,7 @@ public class LicaoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 sublicaoIndex++;
-                updateView();;
+                updateView();
             }
         });
 
@@ -90,7 +89,7 @@ public class LicaoActivity extends AppCompatActivity {
 
                 @Override
                 public void onError(JSONObject result) {
-                    System.out.println("ERRO: " + result);
+                    System.err.println("ERRO: " + result);
                     //Toast.makeText(getApplicationContext(), result.getString("err"), Toast.LENGTH_SHORT).show();
                 }
             });
@@ -100,10 +99,8 @@ public class LicaoActivity extends AppCompatActivity {
     }
 
     private void updateView() {
-        System.out.println("try showing sub " + sublicaoIndex);
         if (sublicaoIndex < sublicoes.size() && sublicaoIndex >= 0) {
             tvTexto.setText(sublicoes.get(sublicaoIndex).getTexto());
-            System.out.println("success");
         } else {
             LicaoActivity.this.finish();
         }

@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -30,9 +29,9 @@ import br.unicamp.cotuca.librasacademy.R;
 import br.unicamp.cotuca.librasacademy.VolleyCallback;
 import br.unicamp.cotuca.librasacademy.WordActivity;
 
-public class Dictionary2Fraagment extends Fragment {
+public class Dictionary2Fragment extends Fragment {
     private String letter;
-    private ArrayList<String> words = new ArrayList<>();
+    private final ArrayList<String> words = new ArrayList<>();
     private Context context;
     private String server;
 
@@ -68,7 +67,7 @@ public class Dictionary2Fraagment extends Fragment {
         params.put("letra", letter);
 
         HttpManager.get(
-                context, server + ":80/palavras/", params, new VolleyCallback() {
+                context, server + "/palavras", params, new VolleyCallback() {
             @Override
             public void onSuccess(JSONObject result) {
                 try {
@@ -86,12 +85,7 @@ public class Dictionary2Fraagment extends Fragment {
 
             @Override
             public void onError(JSONObject result) {
-                try {
-                    Toast.makeText(context, "erro", Toast.LENGTH_SHORT).show();
-                } catch (Exception e) {
-                    Toast.makeText(context, "erro ao lançar erro", Toast.LENGTH_SHORT).show();
-                }
-
+                Toast.makeText(context, "erro", Toast.LENGTH_SHORT).show();
             }
         });
 
