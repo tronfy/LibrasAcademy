@@ -100,7 +100,8 @@ public class LicaoActivity extends AppCompatActivity {
 
     private void updateView() {
         if (sublicaoIndex < sublicoes.size() && sublicaoIndex >= 0) {
-            tvTexto.setText(sublicoes.get(sublicaoIndex).getTexto());
+            String texto = sublicoes.get(sublicaoIndex).getTexto().replaceAll("\\\\n", System.getProperty("line.separator"));
+            tvTexto.setText(texto);
         } else {
             LicaoActivity.this.finish();
         }
