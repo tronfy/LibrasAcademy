@@ -63,13 +63,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tvTexto"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="18dp"
-            android:justificationMode="inter_word"
-            android:padding="6pt"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvTexto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18dp"
+                android:justificationMode="inter_word"
+                android:padding="6pt"/>
+
+            <ImageView
+                android:id="@+id/ivImagem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8pt"/>
+
+        </LinearLayout>
 
     </ScrollView>
 

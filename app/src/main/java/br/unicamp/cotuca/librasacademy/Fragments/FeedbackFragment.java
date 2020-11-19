@@ -56,9 +56,9 @@ public class FeedbackFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        spinnerTipo = (Spinner) view.findViewById(R.id.spinner);
-        btnSend = (Button) view.findViewById(R.id.buttonEnviar);
-        txtDesc = (EditText) view.findViewById(R.id.txtDesc);
+        spinnerTipo = view.findViewById(R.id.spinner);
+        btnSend = view.findViewById(R.id.buttonEnviar);
+        txtDesc = view.findViewById(R.id.txtDesc);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(context,
                 R.array.feedback_types, android.R.layout.simple_spinner_item);

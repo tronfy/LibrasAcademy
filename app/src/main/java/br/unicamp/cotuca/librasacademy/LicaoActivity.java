@@ -3,9 +3,12 @@ package br.unicamp.cotuca.librasacademy;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.bumptech.glide.Glide;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,6 +30,7 @@ public class LicaoActivity extends AppCompatActivity {
 
     private TextView tvNome;
     private TextView tvTexto;
+    private ImageView ivImagem;
     private Button btnPrev;
     private Button btnNext;
 
@@ -37,10 +41,11 @@ public class LicaoActivity extends AppCompatActivity {
 
         server = getResources().getString(R.string.server);
 
-        tvNome = (TextView) findViewById(R.id.name);
-        tvTexto = (TextView) findViewById(R.id.tvTexto);
-        btnPrev = (Button) findViewById(R.id.btnPrev);
-        btnNext = (Button) findViewById(R.id.btnNext);
+        tvNome = findViewById(R.id.name);
+        tvTexto = findViewById(R.id.tvTexto);
+        ivImagem = findViewById(R.id.ivImagem);
+        btnPrev = findViewById(R.id.btnPrev);
+        btnNext = findViewById(R.id.btnNext);
 
         Bundle extras = getIntent().getExtras();
         licao = (Licao) extras.getSerializable("LICAO");
@@ -76,7 +81,8 @@ public class LicaoActivity extends AppCompatActivity {
                             JSONObject o = res.getJSONObject(i);
                             String texto = o.getString("texto");
                             int codigo = o.getInt("codigo");
-                            SubLicao sublicao = new SubLicao(texto, codigo);
+                            String imagem = o.getString("imagem");
+                            SubLicao sublicao = new SubLicao(texto, codigo, imagem);
                             sublicoes.add(sublicao);
                         }
                         System.out.println(sublicoes);
@@ -101,8 +107,18 @@ public class LicaoActivity extends AppCompatActivity {
     private void updateView() {
         if (sublicaoIndex < sublicoes.size() && sublicaoIndex >= 0) {
             tvNome.setText((licao.getNome() + " (" + (sublicaoIndex+1) + "/" + sublicoes.size() + ")"));
+
             String texto = sublicoes.get(sublicaoIndex).getTexto().replaceAll("\\\\n", System.getProperty("line.separator"));
+            String file = sublicoes.get(sublicaoIndex).getImagem();
+            String imagem = "https://imgur.com/" + file;
+
             tvTexto.setText(texto);
+            if (file != null) {
+                Glide.with(LicaoActivity.this)
+                        .load(imagem)
+                        .into(ivImagem);
+            }
+
             if (sublicaoIndex == sublicoes.size() - 1) {
                 btnNext.setText("concluir");
                 btnNext.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_check, 0);

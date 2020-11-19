@@ -35,9 +35,9 @@ public class WordActivity extends AppCompatActivity {
         Bundle b = getIntent().getExtras();
         word = b.getString("word");
 
-        videoSinais = (VideoView) findViewById(R.id.videoSinais);
-        txtWord = (TextView) findViewById(R.id.txtWord);
-        txtInfo = (TextView) findViewById(R.id.txtInfo);
+        videoSinais = findViewById(R.id.videoSinais);
+        txtWord = findViewById(R.id.txtWord);
+        txtInfo = findViewById(R.id.txtInfo);
         txtWord.setText(word);
 
         HashMap<String, String> params = new HashMap<String, String>();

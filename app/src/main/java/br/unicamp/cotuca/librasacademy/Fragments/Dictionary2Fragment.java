@@ -59,9 +59,9 @@ public class Dictionary2Fragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        lstWords = (ListView) view.findViewById(R.id.list_dictionary);
-        search = (ImageButton) view.findViewById(R.id.buttonSearch);
-        txtSearch = (EditText) view.findViewById(R.id.edtTextSerach);
+        lstWords = view.findViewById(R.id.list_dictionary);
+        search = view.findViewById(R.id.buttonSearch);
+        txtSearch = view.findViewById(R.id.edtTextSerach);
 
         HashMap<String, String> params = new HashMap<String, String>();
         params.put("letra", letter);
