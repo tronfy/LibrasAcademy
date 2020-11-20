@@ -1,14 +1,14 @@
 package br.unicamp.cotuca.librasacademy;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.text.method.ScrollingMovementMethod;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.ListView;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.wonderkiln.camerakit.CameraKitError;
@@ -31,20 +31,19 @@ public class CameraActivity extends AppCompatActivity
 
     private Classifier classifier;
 
+    private List<Classifier.Recognition> results;
+
     private Executor executor = Executors.newSingleThreadExecutor();
-    private TextView textViewResult;
     private Button btnDetectObject, btnToggleCamera;
-    private ImageView imageViewResult;
     private CameraView cameraView;
+    private ListView list_itens;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
         cameraView = findViewById(R.id.cameraView);
-        imageViewResult = findViewById(R.id.imageViewResult);
-        textViewResult = findViewById(R.id.textViewResult);
-        textViewResult.setMovementMethod(new ScrollingMovementMethod());
+        list_itens = findViewById(R.id.list_traductions);
 
         btnToggleCamera = findViewById(R.id.btnToggleCamera);
         btnDetectObject = findViewById(R.id.btnDetectObject);
@@ -67,18 +66,18 @@ public class CameraActivity extends AppCompatActivity
 
                 bitmap = Bitmap.createScaledBitmap(bitmap, INPUT_SIZE, INPUT_SIZE, false);
 
-                imageViewResult.setImageBitmap(bitmap);
+                results = classifier.recognizeImage(bitmap);
 
-                final List<Classifier.Recognition> results = classifier.recognizeImage(bitmap);
-
-                textViewResult.setText(results.toString());
-
+                ArrayAdapter<Classifier.Recognition> adapter = new ArrayAdapter<Classifier.Recognition>(getApplicationContext() , android.R.layout.simple_list_item_1, results);
+                list_itens.setAdapter(adapter);
             }
 
             @Override
             public void onVideo(CameraKitVideo cameraKitVideo) {
 
             }
+
+
         });
 
         btnToggleCamera.setOnClickListener(new View.OnClickListener() {
@@ -92,6 +91,20 @@ public class CameraActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 cameraView.captureImage();
+            }
+        });
+
+        list_itens.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                Intent word_data = new Intent(getApplicationContext(), WordActivity.class);
+
+                Bundle mWord = new Bundle();
+                mWord.putString("word", results.get(i).getTitle().split(" ")[0]);
+
+                word_data.putExtras(mWord);
+                startActivity(word_data);
             }
         });
 
