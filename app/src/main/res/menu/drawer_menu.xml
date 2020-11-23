@@ -21,6 +21,10 @@
             android:id="@+id/nav_dictionary"
             android:icon="@drawable/ic_dictionary"
             android:title="Dictionary"/>
+        <item
+            android:id="@+id/nav_camera2"
+            android:icon="@drawable/ic_camera"
+            android:title="Camera2"/>
     </group>
 
     <item android:title="communicate">
