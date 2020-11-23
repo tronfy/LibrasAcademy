@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import br.unicamp.cotuca.librasacademy.CameraActivity;
 import br.unicamp.cotuca.librasacademy.R;
 import br.unicamp.cotuca.librasacademy.WordActivity;
 
@@ -28,6 +29,7 @@ public class DictionaryFragment extends Fragment {
     private ListView itens;
     private ImageButton search;
     private EditText txtSearch;
+    private ImageButton camera;
 
     private String server;
 
@@ -50,6 +52,7 @@ public class DictionaryFragment extends Fragment {
         itens = view.findViewById(R.id.list_dictionary);
         search = view.findViewById(R.id.buttonSearch);
         txtSearch = view.findViewById(R.id.edtTextSerach);
+        camera = view.findViewById(R.id.buttonCamera);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>( context, android.R.layout.simple_list_item_1, alphabet);
 
@@ -78,6 +81,15 @@ public class DictionaryFragment extends Fragment {
 
                 word_data.putExtras(mWord);
                 startActivity(word_data);
+            }
+        });
+
+        camera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent camera = new Intent(getActivity(), CameraActivity.class);
+                ;
+                startActivity(camera);
             }
         });
     }

@@ -120,11 +120,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         new DictionaryFragment()).commit();
                 break;
 
-            case R.id.nav_camera:
-                Intent cameraIntent = new Intent(getApplicationContext(), CameraActivity.class);
-                startActivity(cameraIntent);
-                break;
-
             case R.id.nav_camera2:
                 Intent cameraIntent2 = new Intent(getApplicationContext(), CameraActivity2.class);
                 startActivity(cameraIntent2);

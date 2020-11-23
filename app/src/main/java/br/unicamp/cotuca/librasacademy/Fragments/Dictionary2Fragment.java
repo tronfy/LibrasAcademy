@@ -24,6 +24,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import br.unicamp.cotuca.librasacademy.CameraActivity;
 import br.unicamp.cotuca.librasacademy.HttpManager;
 import br.unicamp.cotuca.librasacademy.R;
 import br.unicamp.cotuca.librasacademy.VolleyCallback;
@@ -38,6 +39,7 @@ public class Dictionary2Fragment extends Fragment {
     private ListView lstWords;
     private EditText txtSearch;
     private ImageButton search;
+    private ImageButton camera;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -62,6 +64,7 @@ public class Dictionary2Fragment extends Fragment {
         lstWords = view.findViewById(R.id.list_dictionary);
         search = view.findViewById(R.id.buttonSearch);
         txtSearch = view.findViewById(R.id.edtTextSerach);
+        camera = view.findViewById(R.id.buttonCamera);
 
         HashMap<String, String> params = new HashMap<String, String>();
         params.put("letra", letter);
@@ -113,6 +116,15 @@ public class Dictionary2Fragment extends Fragment {
                 mWord.putString("word", txtSearch.getText().toString());
                 word_data.putExtras(mWord);
                 startActivity(word_data);
+            }
+        });
+
+        camera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent camera = new Intent(getActivity(), CameraActivity.class);
+                ;
+                startActivity(camera);
             }
         });
     }
