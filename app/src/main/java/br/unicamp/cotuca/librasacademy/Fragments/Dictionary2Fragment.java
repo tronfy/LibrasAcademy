@@ -123,7 +123,6 @@ public class Dictionary2Fragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent camera = new Intent(getActivity(), CameraActivity.class);
-                ;
                 startActivity(camera);
             }
         });

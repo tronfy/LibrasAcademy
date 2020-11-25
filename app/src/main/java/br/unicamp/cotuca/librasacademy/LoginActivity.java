@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +23,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText editTextUsername, editTextPassword;
     private Button buttonLogin;
+
+    private TextView btnSemConta;
 
     private String username, password;
 
@@ -40,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         editTextUsername = findViewById(R.id.editTexUsername);
         editTextPassword = findViewById(R.id.editTextPassword);
         buttonLogin = findViewById(R.id.buttonLogin);
+        btnSemConta = findViewById(R.id.tvSemConta);
 
         loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
 
@@ -75,6 +79,14 @@ public class LoginActivity extends AppCompatActivity {
                 login();
             }
         });
+
+        btnSemConta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent cadastroActivity = new Intent(getApplicationContext(), CadastroActivity.class);
+                startActivity(cadastroActivity);
+            }
+        });
     }
 
     private void login() {
@@ -83,7 +95,6 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), R.string.no_internet, Toast.LENGTH_LONG).show();
                 return;
             }
-            String url = server + "/login";
 
             try {
                 HashMap<String, String> params = new HashMap<String, String>();

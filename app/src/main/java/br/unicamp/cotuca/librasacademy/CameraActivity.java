@@ -33,7 +33,7 @@ public class CameraActivity extends AppCompatActivity
 
     private List<Classifier.Recognition> results;
 
-    private Executor executor = Executors.newSingleThreadExecutor();
+    private final Executor executor = Executors.newSingleThreadExecutor();
     private Button btnDetectObject, btnToggleCamera;
     private CameraView cameraView;
     private ListView list_itens;

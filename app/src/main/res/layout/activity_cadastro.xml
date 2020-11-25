@@ -21,13 +21,27 @@
         android:text="Nome de Usuário" />
 
     <EditText
-        android:id="@+id/editTexUsername"
+        android:id="@+id/editTextUsername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:layout_marginBottom="10pt"
+        android:layout_marginBottom="6pt"
         android:hint="username" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nome Completo" />
+
+    <EditText
+        android:id="@+id/editTextFullName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:layout_marginBottom="6pt"
+        android:hint="nome completo" />
 
     <TextView
         android:id="@+id/textViewPassword"
@@ -41,23 +55,37 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPassword"
-        android:layout_marginBottom="10pt"
+        android:layout_marginBottom="6pt"
+        android:hint="password" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Confirmar Senha" />
+
+    <EditText
+        android:id="@+id/editTextPasswordConfirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:layout_marginBottom="6pt"
         android:hint="password" />
 
     <Button
-        android:id="@+id/buttonLogin"
+        android:id="@+id/buttonCadastrar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/colorPrimary"
         android:textColor="@android:color/white"
-        android:text="Login"/>
+        android:text="Cadastrar"/>
 
     <TextView
-        android:id="@+id/tvSemConta"
+        android:id="@+id/tvTemConta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:text="Não tem conta? Clique aqui"
+        android:text="Já tem conta? Clique aqui"
         android:textStyle="bold"
         android:layout_marginTop="10dp"
         android:paddingTop="10dp"

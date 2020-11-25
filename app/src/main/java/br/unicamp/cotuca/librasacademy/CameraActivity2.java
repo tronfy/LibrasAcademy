@@ -30,7 +30,7 @@ public class CameraActivity2 extends AppCompatActivity {
 
     private Classifier classifier;
 
-    private Executor executor = Executors.newSingleThreadExecutor();
+    private final Executor executor = Executors.newSingleThreadExecutor();
     private TextView textViewResult;
     private Button btnDetectObject, btnToggleCamera;
     private ImageView imageViewResult;
