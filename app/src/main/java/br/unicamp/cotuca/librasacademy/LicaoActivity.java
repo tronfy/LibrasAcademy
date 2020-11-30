@@ -1,10 +1,13 @@
 package br.unicamp.cotuca.librasacademy;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -34,12 +37,18 @@ public class LicaoActivity extends AppCompatActivity {
     private Button btnPrev;
     private Button btnNext;
 
+    private SharedPreferences userPrefs;
+    String username;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_licao);
 
         server = getResources().getString(R.string.server);
+
+        userPrefs = getSharedPreferences("loginPrefs", MODE_PRIVATE);
+        username = userPrefs.getString("username", "");
 
         tvNome = findViewById(R.id.name);
         tvTexto = findViewById(R.id.tvTexto);
@@ -128,7 +137,27 @@ public class LicaoActivity extends AppCompatActivity {
                 btnNext.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_arrow_forward, 0);
             }
         } else {
-            LicaoActivity.this.finish();
+            try {
+                HashMap<String, String> params = new HashMap<String, String>();
+                params.put("username", username);
+                params.put("licao", licao.getCodigo() + "");
+
+                HttpManager.post(this, server + "/concluir", params, new VolleyCallback() {
+                    @Override
+                    public void onSuccess(JSONObject result) {
+                        //LicaoActivity.this.finish();
+                    }
+
+                    @Override
+                    public void onError(JSONObject result) {
+                        Toast.makeText(getApplicationContext(), "Erro ao concluir lição", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            } catch (Exception e) {
+                System.err.println(e.getMessage());
+            } finally {
+                LicaoActivity.this.finish();
+            }
         }
     }
 }

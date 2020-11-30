@@ -42,11 +42,14 @@ public class LicaoAdapter extends BaseAdapter {
         listView = inflater.inflate(R.layout.item_row, null);
         TextView title = listView.findViewById(R.id.text_title);
         TextView description = listView.findViewById(R.id.text_description);
-        TextView autor = listView.findViewById(R.id.text_author);
+        TextView status = listView.findViewById(R.id.text_status);
 
         title.setText(licoes.get(position).getNome());
         description.setText(licoes.get(position).getDescricao());
-        autor.setText("");
+        if (licoes.get(position).getConcluida())
+            status.setText("CONCLUÍDA");
+        else
+            status.setText("");
 
         return listView;
     }
