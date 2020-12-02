@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,14 +41,13 @@ public class SplashScreenActivity extends AppCompatActivity {
             startActivity(loginActivity);
         }
 
-        /*Handler handler = new Handler();
+        Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 tryLogin();
             }
-        }, 1000);*/
-        tryLogin();
+        }, 1000);
     }
 
     private void tryLogin() {

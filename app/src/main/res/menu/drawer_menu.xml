@@ -10,24 +10,16 @@
             android:icon="@drawable/ic_home"
             android:title="Home"/>
         <item
-            android:id="@+id/nav_learn"
-            android:icon="@drawable/ic_school"
-            android:title="Learn"/>
-        <item
-            android:id="@+id/nav_lesson"
-            android:icon="@drawable/ic_edit"
-            android:title="Lesson"/>
-        <item
             android:id="@+id/nav_dictionary"
             android:icon="@drawable/ic_dictionary"
-            android:title="Dictionary"/>
+            android:title="Dicionário"/>
         <item
             android:id="@+id/nav_camera2"
             android:icon="@drawable/ic_camera"
-            android:title="Camera2"/>
+            android:title="Camera"/>
     </group>
 
-    <item android:title="communicate">
+    <item android:title="Comunique-se">
         <menu>
             <item
                 android:id="@+id/nav_feedback"
@@ -37,15 +29,17 @@
             <item
                 android:id="@+id/nav_about"
                 android:icon="@drawable/ic_contact"
-                android:title="About us"/>
+                android:title="Sobre nós"/>
         </menu>
     </item>
 
-    <group>
-        <item
-            android:id="@+id/nav_logout"
-            android:icon="@drawable/ic_login_logout"
-            android:title="Logout"/>
-    </group>
+    <item android:title="Sair">
+        <menu>
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/ic_login_logout"
+                android:title="Logout"/>
+        </menu>
+    </item>
 
 </menu>

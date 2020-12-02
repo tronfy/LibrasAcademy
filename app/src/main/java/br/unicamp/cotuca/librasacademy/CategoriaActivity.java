@@ -138,11 +138,6 @@ public class CategoriaActivity extends AppCompatActivity implements NavigationVi
                 startActivity(intent);
                 break;
 
-            case R.id.nav_lesson:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new LicaoFragment(categoria)).commit();
-                break;
-
             case R.id.nav_dictionary:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new DictionaryFragment()).commit();
@@ -156,6 +151,12 @@ public class CategoriaActivity extends AppCompatActivity implements NavigationVi
             case R.id.nav_about:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new AboutFragment()).commit();
+                break;
+
+            case R.id.nav_logout:
+                Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+                i.putExtra("CLEAR", true);
+                startActivity(i);
                 break;
         }
 
