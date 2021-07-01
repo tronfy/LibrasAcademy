@@ -7,7 +7,7 @@
 O app ensina o alfabeto de Libras através de lições simples, apresentando algumas letras por vez, e palavras formadas com essas letras.
 O app também usa de visão computacional para estimar sinais e objetos, proporcionando uma experiência de aprendizado interativa.
 
-O Libras Academy usa a ![LibrasAPI](https://github.com/nicolasdschmidt/LibrasAPI).
+O Libras Academy usa a ![LibrasAPI](https://github.com/tronfy/LibrasAPI).
 
 
 
